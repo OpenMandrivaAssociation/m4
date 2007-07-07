@@ -1,5 +1,5 @@
 %define	name	m4
-%define	version	1.4.8
+%define	version	1.4.9
 %define	release	%mkrel 1
 
 Summary:	The GNU macro processor
@@ -52,6 +52,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 %{_infodir}/*
 %{_mandir}/man1*/%{name}.1.bz2
-
-
-
