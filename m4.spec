@@ -11,7 +11,6 @@ Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2.sig
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(post,preun):	info-install
 
 %description
