@@ -1,6 +1,6 @@
 %define	name	m4
 %define	version	1.4.10
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 
 Summary:	The GNU macro processor
 Name:		%{name}
