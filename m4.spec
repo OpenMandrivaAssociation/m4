@@ -1,18 +1,15 @@
-%define	name	m4
-%define	version	1.4.10
-%define	release	%mkrel 3
-
 Summary:	The GNU macro processor
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		m4
+Version:	1.4.11
+Release:	%mkrel 1
 License:	GPL
 Group:		Development/Other
-Url:		http://www.gnu.org/software/m4/
+URL:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2.sig
+Requires(post): info-install
+Requires(preun): info-install
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires(post,preun):	info-install
 
 %description
 A GNU implementation of the traditional UNIX macro processor.  M4 is
@@ -25,16 +22,19 @@ not for running configure scripts.
 m4 is most likely needed if you want to compile or develop software.
 
 %prep
+
 %setup -q
 
 %build
 %configure2_5x
 %make
 
+%check
 make check
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
+
 %makeinstall_std infodir=%{_datadir}/info
 
 %post
@@ -44,7 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 %_remove_install_info %{name}.info
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
