@@ -26,6 +26,7 @@ m4 is most likely needed if you want to compile or develop software.
 %setup -q
 
 %build
+export gl_cv_func_strtod_works=no 
 %configure2_5x
 %make
 
