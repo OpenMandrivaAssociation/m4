@@ -1,8 +1,8 @@
 Summary:	The GNU macro processor
 Name:		m4
-Version:	1.4.11
-Release:	%mkrel 2
-License:	GPL
+Version:	1.4.12
+Release:	%mkrel 1
+License:	GPLv3+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
