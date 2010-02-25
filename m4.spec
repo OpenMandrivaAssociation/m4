@@ -31,7 +31,8 @@ export gl_cv_func_strtod_works=no
 %make
 
 %check
-make check
+%define Werror_cflags %nil
+make check CFLAGS="%optflags"
 
 %install
 rm -rf %{buildroot}
