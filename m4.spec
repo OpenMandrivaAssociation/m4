@@ -1,6 +1,6 @@
 Summary:	The GNU macro processor
 Name:		m4
-Version:	1.4.14
+Version:	1.4.15
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		Development/Other
