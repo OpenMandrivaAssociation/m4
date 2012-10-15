@@ -1,13 +1,14 @@
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.16
-Release:	4
+Release:	5
 License:	GPLv3+
 Group:		Development/Other
 URL:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2.sig
 BuildRequires:	libsigsegv-devel
+Patch0:		100-fix-gets-removal.patch
 
 %description
 A GNU implementation of the traditional UNIX macro processor.  M4 is
@@ -21,6 +22,7 @@ m4 is most likely needed if you want to compile or develop software.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 export gl_cv_func_strtod_works=no
