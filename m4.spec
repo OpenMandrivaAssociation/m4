@@ -8,6 +8,7 @@ URL:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2.sig
 Patch1:		m4-1.4.16-glibc-2.16.patch
+Patch2:		m4-aarch64.patch
 BuildRequires:	libsigsegv-devel
 
 %description
@@ -24,6 +25,7 @@ m4 is most likely needed if you want to compile or develop software.
 
 %setup -q
 %patch1 -p1 -b .glibc-2_16
+%patch2 -p1 -b .aarch64
  
 %build
 export gl_cv_func_strtod_works=no 
