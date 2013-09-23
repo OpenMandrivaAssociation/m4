@@ -1,14 +1,12 @@
 Summary:	The GNU macro processor
 Name:		m4
-Version:	1.4.16
-Release:	7
+Version:	1.4.17
+Release:	1
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2.sig
-Patch1:		m4-1.4.16-glibc-2.16.patch
-Patch2:		m4-aarch64.patch
 BuildRequires:	libsigsegv-devel
 
 %description
