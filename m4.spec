@@ -1,12 +1,11 @@
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.17
-Release:	10
+Release:	11
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
-Source1:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2.sig
 BuildRequires:	libsigsegv-devel
 
 %description
@@ -22,15 +21,15 @@ m4 is most likely needed if you want to compile or develop software.
 %prep
 %setup -q
 %apply_patches
- 
+
 %build
-export gl_cv_func_strtod_works=no 
-%configure2_5x
+export gl_cv_func_strtod_works=no
+%configure
 %make
 
 %check
 %define Werror_cflags %{nil}
-make check CFLAGS="%optflags"
+make check CFLAGS="%{optflags}"
 
 %install
 %makeinstall_std infodir=%{_datadir}/info
@@ -40,4 +39,3 @@ make check CFLAGS="%optflags"
 %{_bindir}/%{name}
 %{_infodir}/*
 %{_mandir}/man1*/*
-
