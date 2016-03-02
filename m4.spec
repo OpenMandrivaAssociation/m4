@@ -1,7 +1,7 @@
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.17
-Release:	13
+Release:	14
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
@@ -26,17 +26,14 @@ m4 is most likely needed if you want to compile or develop software.
 %apply_patches
 
 %build
-%define _disable_rebuild_configure 1
+%define _disable_lto 1
 export gl_cv_func_strtod_works=no
 %configure
 %make
 
-# (tpg) somehow this fails on x86_64
-%ifnarch x86_64
 %check
 %define Werror_cflags %{nil}
 make check CFLAGS="%{optflags}"
-%endif
 
 %install
 %makeinstall_std infodir=%{_datadir}/info
