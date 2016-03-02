@@ -1,7 +1,7 @@
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.17
-Release:	12
+Release:	13
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
@@ -26,7 +26,6 @@ m4 is most likely needed if you want to compile or develop software.
 %apply_patches
 
 %build
-%define _disable_rebuild_configure 1
 export gl_cv_func_strtod_works=no
 %configure
 %make
