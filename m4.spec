@@ -29,6 +29,8 @@ m4 is most likely needed if you want to compile or develop software.
 %define _disable_rebuild_configure 1
 %define _disable_lto 1
 export gl_cv_func_strtod_works=no
+export CC=gcc
+export CXX=g++
 %configure
 %make
 
