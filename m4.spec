@@ -1,6 +1,3 @@
-# (tpg) configure.ac:239: error: `' is already registered with AC_CONFIG_HEADERS.
-%global optflags -Os
-
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.17
@@ -30,6 +27,10 @@ m4 is most likely needed if you want to compile or develop software.
 %apply_patches
 
 %build
+# (tpg) configure.ac:239: error: `' is already registered with AC_CONFIG_HEADERS.
+#export CC=gcc
+#export CXX=g++
+
 export gl_cv_func_strtod_works=no
 %configure
 %make
