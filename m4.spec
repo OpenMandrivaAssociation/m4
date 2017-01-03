@@ -7,7 +7,6 @@ Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
-Patch0:		m4-1.4.17-perl-make-check.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsigsegv-devel
