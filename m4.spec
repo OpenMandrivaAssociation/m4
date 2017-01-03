@@ -1,11 +1,11 @@
 Summary:	The GNU macro processor
 Name:		m4
-Version:	1.4.17
-Release:	16.2
+Version:	1.4.18
+Release:	1
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
-Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Patch0:		m4-1.4.17-perl-make-check.patch
 BuildRequires:	autoconf
@@ -43,7 +43,7 @@ make check CFLAGS="%{optflags}"
 %makeinstall_std infodir=%{_datadir}/info
 
 %files
-%doc NEWS README BACKLOG THANKS ChangeLog
+%doc NEWS README BACKLOG THANKS
 %{_bindir}/%{name}
 %{_infodir}/*
 %{_mandir}/man1*/*
