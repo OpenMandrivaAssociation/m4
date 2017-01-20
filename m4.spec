@@ -7,7 +7,6 @@ Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
-Patch0:		m4-1.4.17-perl-make-check.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsigsegv-devel
@@ -27,9 +26,12 @@ m4 is most likely needed if you want to compile or develop software.
 %apply_patches
 
 %build
-# (tpg) configure.ac:239: error: `' is already registered with AC_CONFIG_HEADERS.
-#export CC=gcc
-#export CXX=g++
+# (tpg) build with GCC
+#/tmp/lto-llvm-3aa0ac.o:ld-temp.o:function main: error: undefined reference to '__muloti4'
+#/tmp/lto-llvm-3aa0ac.o:ld-temp.o:function make_room_for: error: undefined reference to '__muloti4'
+#/tmp/lto-llvm-3aa0ac.o:ld-temp.o:function at_fatal_signal: error: undefined reference to '__muloti4'
+export CC=gcc
+export CXX=g++
 
 export gl_cv_func_strtod_works=no
 %configure
