@@ -1,6 +1,10 @@
 # (tpg) optimize it a bit
 %global optflags %{optflags} -O3 --rtlib=compiler-rt
 
+%ifarch %{armx}
+%define _disable_rebuild_configure 1
+%endif
+
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.18
@@ -31,6 +35,10 @@ m4 is most likely needed if you want to compile or develop software.
 %apply_patches
 
 %build
+# (tpg) fix it later ./xalloc.h:107:7: error: use of unknown builtin '__builtin_mul_overflow_p'
+export CC=gcc
+export CXX=g++
+
 export gl_cv_func_strtod_works=no
 %configure
 %make
