@@ -1,7 +1,10 @@
+# (tpg) optimize it a bit
+%global optflags %{optflags} -O3 --rtlib=compiler-rt
+
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.18
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
@@ -10,6 +13,8 @@ Source1:	%{name}.rpmlintrc
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsigsegv-devel
+BuildRequires:	git-core
+Requires:	git-core
 
 %description
 A GNU implementation of the traditional UNIX macro processor.  M4 is
@@ -26,13 +31,6 @@ m4 is most likely needed if you want to compile or develop software.
 %apply_patches
 
 %build
-# (tpg) build with GCC
-#/tmp/lto-llvm-3aa0ac.o:ld-temp.o:function main: error: undefined reference to '__muloti4'
-#/tmp/lto-llvm-3aa0ac.o:ld-temp.o:function make_room_for: error: undefined reference to '__muloti4'
-#/tmp/lto-llvm-3aa0ac.o:ld-temp.o:function at_fatal_signal: error: undefined reference to '__muloti4'
-export CC=gcc
-export CXX=g++
-
 export gl_cv_func_strtod_works=no
 %configure
 %make
