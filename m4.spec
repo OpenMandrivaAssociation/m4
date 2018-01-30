@@ -1,5 +1,5 @@
 # (tpg) optimize it a bit
-%global optflags %{optflags} -O3 --rtlib=compiler-rt
+# global optflags %{optflags} -O3 --rtlib=compiler-rt
 
 %ifarch %{armx}
 %define _disable_rebuild_configure 1
