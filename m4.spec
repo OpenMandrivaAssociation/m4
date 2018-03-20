@@ -8,7 +8,7 @@
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.18
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
@@ -18,7 +18,10 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsigsegv-devel
 BuildRequires:	git-core
+Requires:	/bin/sh
+%ifarch %{armx}
 Requires:	git-core
+%endif
 
 %description
 A GNU implementation of the traditional UNIX macro processor.  M4 is
@@ -32,7 +35,7 @@ m4 is most likely needed if you want to compile or develop software.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 # (tpg) fix it later ./xalloc.h:107:7: error: use of unknown builtin '__builtin_mul_overflow_p'
@@ -41,14 +44,14 @@ export CXX=g++
 
 export gl_cv_func_strtod_works=no
 %configure
-%make
+%make_build
 
 %check
 %define Werror_cflags %{nil}
 make check CFLAGS="%{optflags}"
 
 %install
-%makeinstall_std infodir=%{_datadir}/info
+%make_install infodir=%{_datadir}/info
 
 %files
 %doc NEWS README BACKLOG THANKS
