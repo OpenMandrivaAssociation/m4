@@ -1,5 +1,5 @@
-# (tpg) optimize it a bit
-# global optflags %{optflags} -O3 --rtlib=compiler-rt
+# For __muloti4
+%global optflags %{optflags} --rtlib=compiler-rt
 
 %ifarch %{armx}
 %define _disable_rebuild_configure 1
@@ -8,20 +8,18 @@
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.18
-Release:	3
+Release:	5
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
+Patch0:		m4-1.4.18-clang.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsigsegv-devel
 BuildRequires:	git-core
 Requires:	/bin/sh
-%ifarch %{armx}
-Requires:	git-core
-%endif
 
 %description
 A GNU implementation of the traditional UNIX macro processor.  M4 is
@@ -38,10 +36,6 @@ m4 is most likely needed if you want to compile or develop software.
 %autopatch -p1
 
 %build
-# (tpg) fix it later ./xalloc.h:107:7: error: use of unknown builtin '__builtin_mul_overflow_p'
-export CC=gcc
-export CXX=g++
-
 export gl_cv_func_strtod_works=no
 %configure
 %make_build
