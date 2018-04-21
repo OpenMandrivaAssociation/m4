@@ -1,5 +1,7 @@
+%ifnarch %{ix86}
 # For __muloti4
 %global optflags %{optflags} --rtlib=compiler-rt
+%endif
 
 %ifarch %{armx}
 %define _disable_rebuild_configure 1
@@ -37,6 +39,15 @@ m4 is most likely needed if you want to compile or develop software.
 
 %build
 export gl_cv_func_strtod_works=no
+
+%ifarch %{ix86}
+# FIXME
+# BUILDSTDERR: test-stdalign.c:70:1: error: static_assert failed "verify (alignof (int64_t) == offsetof (int64_t_helper, slot2))"
+# BUILDSTDERR: test-stdalign.c:73:1: error: static_assert failed "verify (alignof (double) == offsetof (double_helper, slot2))"
+export CC=gcc
+export CXX=g++
+%endif
+
 %configure
 %make_build
 
