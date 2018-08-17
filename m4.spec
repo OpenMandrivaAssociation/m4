@@ -52,9 +52,11 @@ export CXX=g++
 %configure
 %make_build
 
+%ifnarch znver1
 %check
 %define Werror_cflags %{nil}
 make check CFLAGS="%{optflags}"
+%endif
 
 %install
 %make_install infodir=%{_datadir}/info
