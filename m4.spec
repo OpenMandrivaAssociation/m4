@@ -1,7 +1,5 @@
-%ifnarch %{ix86}
 # For __muloti4
 %global optflags %{optflags} --rtlib=compiler-rt
-%endif
 
 %ifarch %{armx}
 %define _disable_rebuild_configure 1
@@ -10,7 +8,7 @@
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.18
-Release:	9
+Release:	10
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
@@ -21,7 +19,7 @@ Patch1:		0002-Fix-build-with-glibc-2.18.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsigsegv-devel
-BuildRequires:	git-core
+BuildRequires:	hostname
 Requires:	/bin/sh
 
 %description
