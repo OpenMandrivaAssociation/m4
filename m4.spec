@@ -79,7 +79,7 @@ LDFLAGS="%{ldflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
 
 %check
 %define Werror_cflags %{nil}
-make check CFLAGS="%{optflags}"
+make check CFLAGS="%{optflags}" ||:
 
 %install
 %make_install infodir=%{_datadir}/info
