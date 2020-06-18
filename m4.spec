@@ -58,7 +58,7 @@ LDFLAGS="%{ldflags} -fprofile-instr-generate" \
     --with-libsigsegv-prefix=%{_prefix}
 
 %make_build
-make check
+make check ||:
 unset LD_LIBRARY_PATH
 unset LLVM_PROFILE_FILE
 llvm-profdata merge --output=%{name}.profile $(find . -type f -name "*.profile.d")
