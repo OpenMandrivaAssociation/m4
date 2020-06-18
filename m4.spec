@@ -5,10 +5,17 @@
 %define _disable_rebuild_configure 1
 %endif
 
+# (tpg) enable PGO build
+%ifnarch riscv64
+%bcond_without pgo
+%else
+%bcond_with pgo
+%endif
+
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.18
-Release:	11
+Release:	12
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
@@ -38,6 +45,32 @@ m4 is most likely needed if you want to compile or develop software.
 %build
 export gl_cv_func_strtod_works=no
 
+%if %{with pgo}
+export LLVM_PROFILE_FILE=%{name}-%p.profile.d
+export LD_LIBRARY_PATH="$(pwd)"
+CFLAGS="%{optflags} -fprofile-instr-generate" \
+CXXFLAGS="%{optflags} -fprofile-instr-generate" \
+FFLAGS="$CFLAGS" \
+FCFLAGS="$CFLAGS" \
+LDFLAGS="%{ldflags} -fprofile-instr-generate" \
+%configure \
+    --without-included-regex \
+    --with-libsigsegv-prefix=%{_prefix}
+
+%make_build
+make check
+unset LD_LIBRARY_PATH
+unset LLVM_PROFILE_FILE
+llvm-profdata merge --output=%{name}.profile $(find . -type f -name "*.profile.d")
+rm -f *.profile.d
+make clean
+
+CFLAGS="$RPM_OPT_FLAGS -fprofile-instr-use=$(realpath %{name}.profile)" \
+CXXFLAGS="%{optflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
+FFLAGS="$CFLAGS" \
+FCFLAGS="$CFLAGS" \
+LDFLAGS="%{ldflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
+%endif
 %configure \
     --without-included-regex \
     --with-libsigsegv-prefix=%{_prefix}
