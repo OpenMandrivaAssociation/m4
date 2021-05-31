@@ -14,15 +14,14 @@
 
 Summary:	The GNU macro processor
 Name:		m4
-Version:	1.4.18
-Release:	12
+Version:	1.4.19
+Release:	1
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
-Patch0:		m4-1.4.18-clang.patch
-Patch1:		0002-Fix-build-with-glibc-2.18.patch
+
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libsigsegv-devel
@@ -84,7 +83,9 @@ make check CFLAGS="%{optflags}" ||:
 %install
 %make_install infodir=%{_datadir}/info
 
-%files
+%find_lang %{name}
+
+%files -f %{name}.lang
 %doc NEWS README BACKLOG THANKS
 %{_bindir}/%{name}
 %{_infodir}/*
