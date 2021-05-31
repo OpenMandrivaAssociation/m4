@@ -84,7 +84,9 @@ make check CFLAGS="%{optflags}" ||:
 %install
 %make_install infodir=%{_datadir}/info
 
-%files
+%find_lang %{name}
+
+%files -f %{name}.lang
 %doc NEWS README BACKLOG THANKS
 %{_bindir}/%{name}
 %{_infodir}/*
