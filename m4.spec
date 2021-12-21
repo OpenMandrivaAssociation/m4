@@ -6,16 +6,12 @@
 %endif
 
 # (tpg) enable PGO build
-%ifnarch riscv64
 %bcond_without pgo
-%else
-%bcond_with pgo
-%endif
 
 Summary:	The GNU macro processor
 Name:		m4
 Version:	1.4.19
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Development/Other
 Url:		http://www.gnu.org/software/m4/
@@ -45,13 +41,11 @@ m4 is most likely needed if you want to compile or develop software.
 export gl_cv_func_strtod_works=no
 
 %if %{with pgo}
-export LLVM_PROFILE_FILE=%{name}-%p.profile.d
 export LD_LIBRARY_PATH="$(pwd)"
-CFLAGS="%{optflags} -fprofile-instr-generate" \
-CXXFLAGS="%{optflags} -fprofile-instr-generate" \
-FFLAGS="$CFLAGS" \
-FCFLAGS="$CFLAGS" \
-LDFLAGS="%{ldflags} -fprofile-instr-generate" \
+
+CFLAGS="%{optflags} -fprofile-generate" \
+CXXFLAGS="%{optflags} -fprofile-generate" \
+LDFLAGS="%{build_ldflags} -fprofile-generate" \
 %configure \
     --without-included-regex \
     --with-libsigsegv-prefix=%{_prefix}
@@ -59,16 +53,14 @@ LDFLAGS="%{ldflags} -fprofile-instr-generate" \
 %make_build
 make check ||:
 unset LD_LIBRARY_PATH
-unset LLVM_PROFILE_FILE
-llvm-profdata merge --output=%{name}.profile $(find . -type f -name "*.profile.d")
-rm -f *.profile.d
+llvm-profdata merge --output=%{name}-llvm.profdata $(find . -name "*.profraw" -type f)
+PROFDATA="$(realpath %{name}-llvm.profdata)"
+rm -f *.profraw
 make clean
 
-CFLAGS="$RPM_OPT_FLAGS -fprofile-instr-use=$(realpath %{name}.profile)" \
-CXXFLAGS="%{optflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
-FFLAGS="$CFLAGS" \
-FCFLAGS="$CFLAGS" \
-LDFLAGS="%{ldflags} -fprofile-instr-use=$(realpath %{name}.profile)" \
+CFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
+CXXFLAGS="%{optflags} -fprofile-use=$PROFDATA" \
+LDFLAGS="%{build_ldflags} -fprofile-use=$PROFDATA" \
 %endif
 %configure \
     --without-included-regex \
@@ -88,5 +80,5 @@ make check CFLAGS="%{optflags}" ||:
 %files -f %{name}.lang
 %doc NEWS README BACKLOG THANKS
 %{_bindir}/%{name}
-%{_infodir}/*
-%{_mandir}/man1*/*
+%doc %{_infodir}/*
+%doc %{_mandir}/man1*/*
