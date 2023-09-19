@@ -5,8 +5,12 @@
 %define _disable_rebuild_configure 1
 %endif
 
+%if %{cross_compiling}
+%bcond_with pgo
+%else
 # (tpg) enable PGO build
 %bcond_without pgo
+%endif
 
 Summary:	The GNU macro processor
 Name:		m4
