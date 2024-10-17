@@ -18,7 +18,7 @@ Version:	1.4.19
 Release:	4
 License:	GPLv3+
 Group:		Development/Other
-Url:		http://www.gnu.org/software/m4/
+Url:		https://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 
