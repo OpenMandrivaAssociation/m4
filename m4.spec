@@ -22,6 +22,7 @@ Source1:	%{name}.rpmlintrc
 BuildRequires:	slibtool
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libtool-base
 BuildRequires:	libsigsegv-devel
 BuildRequires:	hostname
 Requires:	/bin/sh
