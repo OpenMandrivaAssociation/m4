@@ -25,6 +25,7 @@ BuildRequires:	automake
 BuildRequires:	libtool-base
 BuildRequires:	libsigsegv-devel
 BuildRequires:	hostname
+BuildRequires:	make
 Requires:	/bin/sh
 
 %description
