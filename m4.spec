@@ -1,6 +1,3 @@
-# For __muloti4
-%global optflags %{optflags} --rtlib=compiler-rt
-
 %ifarch %{armx}
 %define _disable_rebuild_configure 1
 %endif
@@ -14,15 +11,14 @@
 
 Summary:	The GNU macro processor
 Name:		m4
-Version:	1.4.19
-Release:	4
+Version:	1.4.20
+Release:	1
 License:	GPLv3+
 Group:		Development/Other
 Url:		https://www.gnu.org/software/m4/
 Source0:	ftp://ftp.gnu.org/pub/gnu/%{name}/%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -84,7 +80,7 @@ make check CFLAGS="%{optflags}" ||:
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc NEWS README BACKLOG THANKS
+%doc NEWS README THANKS
 %{_bindir}/%{name}
 %doc %{_infodir}/*
 %doc %{_mandir}/man1*/*
